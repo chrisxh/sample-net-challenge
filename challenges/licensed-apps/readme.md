@@ -6,7 +6,7 @@ The details are intentionally light so that you can feel free to use the tools a
 
 ### Instructions
 Imagine a fictional App Store that contains many applications that will be purchased by customers.  One of the functional areas would be management of customer licenses for an application.  Please create a simple web application (use any Microsoft .NET based framework) that accomplishes the following:
-    * User can manage a list of Apps - an App has a title and (Fontawesome)[http://fortawesome.github.io/Font-Awesome/] icon (css class)
+* User can manage a list of Apps - an App has a title and (Fontawesome)[http://fortawesome.github.io/Font-Awesome/] icon (css class)
 	* User can manage a list of Customers - a Customer has a name, number, and email address
 	* User can manage App Licenses for a Customer - a License identifies the App and Customer it is for, as well as a date range in which it is active
 	* Anonymous HTTP GET requests can be sent to some url to get information as follows:
