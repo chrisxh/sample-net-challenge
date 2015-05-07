@@ -1,0 +1,42 @@
+﻿@model AppStore.Models.Customer.Customer
+@{
+    ViewBag.Title = "Add Customer";
+}
+
+<h2>Customer Information</h2>
+
+@using (Html.BeginForm("AddCustomer", "Customer", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name)
+    </div>
+    <div>
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.EmailAddress)
+        @Html.TextBoxFor(x => x.EmailAddress)
+    </div>
+    <div>
+        @Html.ValidationMessageFor(x => x.EmailAddress)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Number)
+        @Html.TextBoxFor(x => x.Number)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Active)
+        @Html.CheckBoxFor(x => x.Active)
+    </div>
+
+    <input type="submit" value="Submit" />
+
+}
+
+
+
+

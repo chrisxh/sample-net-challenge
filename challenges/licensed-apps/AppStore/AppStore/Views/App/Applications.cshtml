@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AppStore.Models.Apps.Application>
+@{
+    ViewBag.Title = "Apps";
+}
+
+<h2>App</h2>
+
+<div>@Html.ActionLink("Add", "AddApplication")</div>
+<div style="height: 50px;"></div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Icon
+                </th>
+                <th>
+                    Active
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(x.Title, "GetApp", new { appId = x.Id }, null)</td>
+                    <td>@x.Icon</td>
+                    <td>@x.Active</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,33 @@
+﻿@model AppStore.Models.Apps.Application
+@{
+    ViewBag.Title = "Add App License";
+}
+
+<h2>Add App Licenses</h2>
+
+@using (Html.BeginForm("AddLicensesToApp", "App", FormMethod.Post))
+{
+
+    <div style="height: 20px"></div>
+
+    <div>@Html.HiddenFor(x => x.Id)</div>
+
+    <div>
+        @Html.LabelFor(x => x.Title)
+        @Html.DisplayFor(x => x.Title)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Icon)
+        @Html.DisplayFor(x => x.Icon)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Active)
+        @Html.DisplayFor(x => x.Active)
+    </div>
+
+    <div>
+        @{ Html.RenderAction("GetActiveLicenses", "App"); }
+    </div>
+    <div style="height: 25px;"></div>
+    <input type="submit" value="Submit"/>
+}

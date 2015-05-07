@@ -1,0 +1,37 @@
+﻿@model AppStore.Models.Customer.Customer
+@{
+    ViewBag.Title = "Add App To Customer";
+}
+
+<h2>Add App To Customer</h2>
+
+@using (Html.BeginForm("AddCustomerApp", "App", FormMethod.Post))
+{
+
+    <div style="height: 20px"></div>
+
+    <div>@Html.HiddenFor(x => x.Id)</div>
+
+    <div>
+        @Html.LabelFor(x => x.Name)
+        @Html.DisplayFor(x => x.Name)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.EmailAddress)
+        @Html.DisplayFor(x => x.EmailAddress)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Number)
+        @Html.DisplayFor(x => x.Number)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Active)
+        @Html.DisplayFor(x => x.Active)
+    </div>
+
+    <div>
+        @{ Html.RenderAction("GetActiveApplications", "App"); }
+    </div>
+    <div style="height: 25px;"></div>
+    <input type="submit" value="Submit" />
+}

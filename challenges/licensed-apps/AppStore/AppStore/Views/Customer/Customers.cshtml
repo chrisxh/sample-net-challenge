@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AppStore.Models.Customer.Customer>
+@{
+    ViewBag.Title = "Customers";
+}
+
+<h2>Customers</h2>
+
+<div>@Html.ActionLink("Add","AddCustomer")</div>
+<div style="height: 50px;"></div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Active
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(x.Name,"GetCustomer",new {custId = x.Id},null)</td>
+                    <td>@x.EmailAddress</td>
+                    <td>@x.Number</td>
+                    <td>@x.Active</td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+
+
+

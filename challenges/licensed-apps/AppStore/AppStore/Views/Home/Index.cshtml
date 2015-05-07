@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "App Store";
+}
+
+<div class="jumbotron">
+    <h1>Admin Panel</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+       @Html.ActionLink("Customers","Customers","Customer")   
+    </div>
+    <div class="col-md-4">
+        @Html.ActionLink("Applications", "Applications", "App")
+    </div>
+    <div class="col-md-4">
+        @Html.ActionLink("Licenses", "Licenses", "Licenses")
+    </div>
+</div>
