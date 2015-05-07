@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ApplicationStoreDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Icon" Type="varchar" MaxLength="150" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="150" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="DateInserted" Type="datetime2" Precision="7" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="CustomerLicenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="LicenseId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="License">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActiveDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="DeActiveDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Number" Type="varchar" MaxLength="250" />
+    <Property Name="TakenDate" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="LicensedApps">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppId" Type="int" Nullable="false" />
+    <Property Name="LicenseId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CustomerLicenses_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="CustomerLicenses" Type="Self.CustomerLicenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CustomerLicenses">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerLicenses_License">
+    <End Role="License" Type="Self.License" Multiplicity="1" />
+    <End Role="CustomerLicenses" Type="Self.CustomerLicenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="License">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CustomerLicenses">
+        <PropertyRef Name="LicenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LicensedApps_App">
+    <End Role="App" Type="Self.App" Multiplicity="1" />
+    <End Role="LicensedApps" Type="Self.LicensedApps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="App">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LicensedApps">
+        <PropertyRef Name="AppId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LicensedApps_License">
+    <End Role="License" Type="Self.License" Multiplicity="1" />
+    <End Role="LicensedApps" Type="Self.LicensedApps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="License">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LicensedApps">
+        <PropertyRef Name="LicenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ApplicationStoreDBModelStoreContainer">
+    <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerLicenses" EntityType="Self.CustomerLicenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="License" EntityType="Self.License" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LicensedApps" EntityType="Self.LicensedApps" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CustomerLicenses_Customer" Association="Self.FK_CustomerLicenses_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="CustomerLicenses" EntitySet="CustomerLicenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerLicenses_License" Association="Self.FK_CustomerLicenses_License">
+      <End Role="License" EntitySet="License" />
+      <End Role="CustomerLicenses" EntitySet="CustomerLicenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LicensedApps_App" Association="Self.FK_LicensedApps_App">
+      <End Role="App" EntitySet="App" />
+      <End Role="LicensedApps" EntitySet="LicensedApps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LicensedApps_License" Association="Self.FK_LicensedApps_License">
+      <End Role="License" EntitySet="License" />
+      <End Role="LicensedApps" EntitySet="LicensedApps" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
