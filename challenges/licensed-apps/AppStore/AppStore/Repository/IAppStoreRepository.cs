@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using AppStore.Models.Apps;
 using AppStore.Models.Customer;
+using AppStore.Models.CustomerApps;
+using AppStore.Models.LicenseApps;
 using AppStore.Models.Licenses;
 
 namespace AppStore.Repository
@@ -46,6 +48,14 @@ namespace AppStore.Repository
         IEnumerable<License> GetAppLicenses(int appId);
         
         IEnumerable<License> GetActiveLicenses();
+
+        void AddLicensesToApp(LicensedApp appLicense);
+
+        IEnumerable<Application> GetCustomerApplications(int custId);
+
+        IEnumerable<ActiveApplications> GetActiveLicensedApps();
+
+        void AddCustomerToApps(CustApps custApps);
 
     }
 }

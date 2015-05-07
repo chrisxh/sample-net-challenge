@@ -34,7 +34,7 @@
                 <td>@x.ActiveDate</td>
                 <td>@x.DeActiveDate</td>
                 <td>@x.Active</td>
-                <td><input id="Vendor@(x.Id)" type="checkbox" name="vendors" value="@x.Id" /></td>
+                <td>@Html.CheckBox("licensedApp", new{name="licensedApp", value=x.Id})</td>
             </tr>
         }
 

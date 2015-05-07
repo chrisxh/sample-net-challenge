@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AppStore.Models.Apps.Application>
+@{
+    ViewBag.Title = "Customers Apps";
+}
+
+<h2>Customers Apps</h2>
+
+<div style="height: 50px;"></div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Icon
+                </th>
+                <th>
+                    Active
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.Id</td>
+                    <td>@x.Title</td>
+                    <td>@x.Icon</td>
+                    <td>@x.Active</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+

@@ -41,5 +41,19 @@ namespace AppStore.Controllers
             var custModel = _custRepo.GetCustomer(custId);
             return View("Edit",custModel);
         }
+
+        public ActionResult GetCustomerApps(int custId)
+        {
+            var model = _custRepo.GetCustomerApplications(custId);
+            
+            return PartialView("_CustomerApplicatons",model);
+        }
+
+        public ActionResult AddAppToCustomer(int custId)
+        {
+            var custModel = _custRepo.GetCustomer(custId);
+
+            return View("AddCustomerApp",custModel);
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AppStore.Models.Apps;
+using AppStore.Models.CustomerApps;
+using AppStore.Models.LicenseApps;
 using AppStore.Repository;
 
 namespace AppStore.Controllers
@@ -61,6 +63,72 @@ namespace AppStore.Controllers
             var act = _appRepo.GetActiveLicenses();
 
             return PartialView("_ActiveLicenses",act);
+        }
+
+        public ActionResult AddLicensesToApp(FormCollection result)
+        {
+            string selected = Request.Form["licensedApp"].ToString();
+
+            var model = new LicensedApp();
+
+            model.Id = Convert.ToInt32(Request.Form["Id"]);
+
+            model.LicenseApp = new List<LicensedIds>();
+
+            string[] selectedList = selected.Split(Convert.ToChar(","));
+
+            foreach (var lic in selectedList)
+            {
+                int value;
+                if (int.TryParse(lic, out value))
+                {
+                    model.LicenseApp.Add(new LicensedIds
+                    {
+                        LicenseId = Convert.ToInt32(lic)
+                    });
+                }
+                
+            }
+            
+            _appRepo.AddLicensesToApp(model);
+
+            return RedirectToAction("Applications");
+        }
+
+        public ActionResult GetActiveApplications()
+        {
+            var activeApps = _appRepo.GetActiveLicensedApps();
+
+            return PartialView("_ActiveApps", activeApps);
+        }
+
+        public ActionResult AddCustomerApp(FormCollection appResult)
+        {
+            string selected = Request.Form["activeApp"].ToString();
+
+            var model = new CustApps();
+
+            model.Id = Convert.ToInt32(Request.Form["Id"]);
+
+            model.LicensedApp = new List<LicensedIds>();
+
+            string[] selectedList = selected.Split(Convert.ToChar(","));
+
+            foreach (var lic in selectedList)
+            {
+                int value;
+                if (int.TryParse(lic, out value))
+                {
+                    model.LicensedApp.Add(new LicensedIds
+                    {
+                        LicenseId = Convert.ToInt32(lic)
+                    });
+                }
+            }
+
+            _appRepo.AddCustomerToApps(model);
+
+            return RedirectToAction("Customers", "Customer");
         }
     }
 }

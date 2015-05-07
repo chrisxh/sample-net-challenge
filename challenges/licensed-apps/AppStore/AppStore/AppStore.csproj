@@ -124,8 +124,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Apps\ActiveApplicationscs.cs" />
     <Compile Include="Models\Apps\Application.cs" />
+    <Compile Include="Models\CustomerApps\CustApps.cs" />
     <Compile Include="Models\Customer\Customer.cs" />
+    <Compile Include="Models\LicenseApps\LicensedApp.cs" />
+    <Compile Include="Models\LicenseApps\LicensedIds.cs" />
     <Compile Include="Models\Licenses\License.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AppStoreRespository.cs" />
@@ -181,6 +185,9 @@
     <Content Include="Views\App\_AppLicenses.cshtml" />
     <Content Include="Views\App\AddAppLicenses.cshtml" />
     <Content Include="Views\App\_ActiveLicenses.cshtml" />
+    <Content Include="Views\Customer\_CustomerApplicatons.cshtml" />
+    <Content Include="Views\Customer\AddCustomerApp.cshtml" />
+    <Content Include="Views\App\_ActiveApps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

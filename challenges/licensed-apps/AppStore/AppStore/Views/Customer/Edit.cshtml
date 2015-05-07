@@ -5,6 +5,8 @@
 
 <h2>Edit Customer Information</h2>
 
+<div>@Html.ActionLink("Add App to Customer", "AddAppToCustomer", new { custId = Model.Id }, null)</div>
+
 @using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
 {
     <div>@Html.HiddenFor(x => x.Id)</div>
@@ -38,4 +40,8 @@
     <input type="submit" value="Submit" />
 
 }
+
+<div>
+    @{ Html.RenderAction("GetCustomerApps", "Customer", new { custId = Model.Id }); }
+</div>
 

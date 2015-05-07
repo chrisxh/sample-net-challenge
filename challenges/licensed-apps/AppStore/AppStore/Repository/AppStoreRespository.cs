@@ -2,6 +2,8 @@
 using System.Configuration;
 using AppStore.Models.Apps;
 using AppStore.Models.Customer;
+using AppStore.Models.CustomerApps;
+using AppStore.Models.LicenseApps;
 using AppStore.Models.Licenses;
 using Newtonsoft.Json;
 using RestSharp;
@@ -149,6 +151,41 @@ namespace AppStore.Repository
             var data = JsonConvert.DeserializeObject<IEnumerable<License>>(response.Content);
 
             return data;
+        }
+
+        public void AddLicensesToApp(LicensedApp appLicense)
+        {
+            var request = new RestRequest("v1/applicense/", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(appLicense);
+            _client.Execute(request);
+        }
+
+        public IEnumerable<Application> GetCustomerApplications(int custId)
+        {
+            var request = new RestRequest("v1/customerApps/", Method.GET);
+            request.AddParameter("id", custId);
+            var response = _client.Execute(request);
+            var data = JsonConvert.DeserializeObject<IEnumerable<Application>>(response.Content);
+
+            return data;
+        }
+
+        public IEnumerable<ActiveApplications> GetActiveLicensedApps()
+        {
+            var request = new RestRequest("v1/activeapps/", Method.GET);
+            var response = _client.Execute(request);
+            var data = JsonConvert.DeserializeObject<IEnumerable<ActiveApplications>>(response.Content);
+
+            return data;
+        }
+
+        public void AddCustomerToApps(CustApps custApps)
+        {
+            var request = new RestRequest("v1/customerApps/", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(custApps);
+            _client.Execute(request);
         }
     }
 }
