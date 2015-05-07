@@ -1,0 +1,40 @@
+﻿@model AppStore.Models.Apps.Application
+@{
+    ViewBag.Title = "Edit App";
+}
+
+<h2>Edit App Information</h2>
+
+<div>@Html.ActionLink("Add License to App", "AddAppLic", new { appId = Model.Id }, null)</div>
+<div style="height: 20px"></div>
+
+@using (Html.BeginForm("EditApplication", "App", FormMethod.Post))
+{
+    <div>@Html.HiddenFor(x => x.Id)</div>
+
+    <div>
+        @Html.LabelFor(x => x.Title)
+        @Html.TextBoxFor(x => x.Title)
+    </div>
+    <div>
+        @Html.ValidationMessageFor(x => x.Title)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Icon)
+        @Html.TextBoxFor(x => x.Icon)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Active)
+        @Html.CheckBoxFor(x => x.Active)
+    </div>
+
+    <input type="submit" value="Submit" />
+
+}
+
+<div>
+    @{ Html.RenderAction("GetAppLic", "App", new{ id = Model.Id}); }
+</div>
+
+

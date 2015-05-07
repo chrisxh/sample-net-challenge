@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AppStore.Models.Licenses.License>
+
+<h2>Active Licenses</h2>
+
+<div style="height: 50px;"></div>
+<div>
+<table>
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Number
+            </th>
+            <th>
+                Active Date
+            </th>
+            <th>
+                DeActive Date
+            </th>
+            <th>
+                Active
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Number</td>
+                <td>@x.ActiveDate</td>
+                <td>@x.DeActiveDate</td>
+                <td>@x.Active</td>
+                <td>@Html.CheckBox("licensedApp", new{name="licensedApp", value=x.Id})</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+</div>

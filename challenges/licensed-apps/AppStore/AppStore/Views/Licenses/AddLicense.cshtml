@@ -1,0 +1,44 @@
+﻿@model AppStore.Models.Licenses.License
+@{
+    ViewBag.Title = "Add License";
+}
+
+<h2>Customer Information</h2>
+
+@using (Html.BeginForm("AddLicense", "Licenses", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(x => x.Number)
+        @Html.TextBoxFor(x => x.Number)
+    </div>
+    <div>
+        @Html.ValidationMessageFor(x => x.Number)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.ActiveDate)
+        @Html.TextBoxFor(x => x.ActiveDate)
+    </div>
+    <div>
+        @Html.ValidationMessageFor(x => x.ActiveDate)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.DeActiveDate)
+        @Html.TextBoxFor(x => x.DeActiveDate)
+    </div>
+    <div>
+        @Html.ValidationMessageFor(x => x.DeActiveDate)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Active)
+        @Html.CheckBoxFor(x => x.Active)
+    </div>
+
+    <input type="submit" value="Submit" />
+
+}
+
+
+
+
+

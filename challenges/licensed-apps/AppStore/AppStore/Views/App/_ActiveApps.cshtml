@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AppStore.Models.Apps.ActiveApplications>
+   
+<h2>Active Applications</h2>
+
+<div style="height: 50px;"></div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Icon
+                </th>
+                <th>
+                    Active
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.Application.Id</td>
+                    <td>@x.Application.Title</td>
+                    <td>@x.Application.Icon</td>
+                    <td>@x.Application.Active</td>
+                    <td>@Html.CheckBox("activeApp", new { name = "activeApp", value = x.LicenseId })</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+        
+

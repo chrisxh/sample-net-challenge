@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AppStore.Models.Licenses.License>
+@{
+    ViewBag.Title = "Licenses";
+}
+
+<h2>Licenses</h2>
+
+<div>@Html.ActionLink("Add", "AddLicense")</div>
+<div style="height: 50px;"></div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Active Date
+                </th>
+                <th>
+                    DeActive Date
+                </th>
+                <th>
+                    Active
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(x.Number, "GetLicense", new { licId = x.Id }, null)</td>
+                    <td>@x.ActiveDate</td>
+                    <td>@x.DeActiveDate</td>
+                    <td>@x.Active</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+

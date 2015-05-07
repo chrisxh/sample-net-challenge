@@ -1,0 +1,29 @@
+﻿@model AppStore.Models.Apps.Application
+@{
+    ViewBag.Title = "Add App";
+}
+
+<h2>App Information</h2>
+
+@using (Html.BeginForm("AddApplication", "App", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(x => x.Title)
+        @Html.TextBoxFor(x => x.Title)
+    </div>
+    <div>
+        @Html.ValidationMessageFor(x => x.Title)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Icon)
+        @Html.TextBoxFor(x => x.Icon)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Active)
+        @Html.CheckBoxFor(x => x.Active)
+    </div>
+
+    <input type="submit" value="Submit" />
+
+}
