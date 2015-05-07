@@ -42,6 +42,7 @@
     <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Number" Type="varchar" MaxLength="250" />
+    <Property Name="TakenDate" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="LicensedApps">
     <Key>

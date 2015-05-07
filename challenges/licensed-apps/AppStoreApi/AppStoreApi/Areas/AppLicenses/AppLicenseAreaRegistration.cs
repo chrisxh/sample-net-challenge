@@ -24,6 +24,12 @@ namespace AppStoreApi.Areas.AppLicenses
               routeTemplate: "v1/AppLicense",
               defaults: new { Controller = "AppLicense" }
           );
+
+            context.Routes.MapHttpRoute(
+              name: "ActiveApps",
+              routeTemplate: "v1/ActiveApps",
+              defaults: new { Controller = "ActiveApps" }
+          );
         }
     }
 }

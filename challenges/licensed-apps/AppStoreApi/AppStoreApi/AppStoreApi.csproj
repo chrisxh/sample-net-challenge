@@ -117,8 +117,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\AppLicenses\Views\ActiveApps\" />
     <Folder Include="Areas\AppLicenses\Views\AppLicense\" />
-    <Folder Include="Areas\CustomerLicenses\" />
+    <Folder Include="Areas\CustomerApps\Views\CustApps\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -126,9 +127,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\AppLicenses\AppLicenseAreaRegistration.cs" />
+    <Compile Include="Areas\AppLicenses\Controllers\ActiveAppsController.cs" />
     <Compile Include="Areas\AppLicenses\Controllers\AppLicenseController.cs" />
     <Compile Include="Areas\Apps\AppsAreaRegistration.cs" />
     <Compile Include="Areas\Apps\Controllers\AppsController.cs" />
+    <Compile Include="Areas\CustomerApps\CustAppsAreaRegistration.cs" />
+    <Compile Include="Areas\CustomerApps\Controllers\CustAppsController.cs" />
     <Compile Include="Areas\Customer\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
@@ -196,8 +200,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActiveApplication.cs" />
     <Compile Include="Models\AppInfo.cs" />
+    <Compile Include="Models\CustomerApps.cs" />
     <Compile Include="Models\CustomerInfo.cs" />
+    <Compile Include="Models\LicensedApp.cs" />
+    <Compile Include="Models\LicensedIds.cs" />
     <Compile Include="Models\LicenseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Repository.cs" />

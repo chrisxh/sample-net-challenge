@@ -38,6 +38,7 @@
     <EntitySetMapping Name="Licenses">
       <EntityTypeMapping TypeName="ApplicationStoreDBModel.License">
         <MappingFragment StoreEntitySet="License">
+          <ScalarProperty Name="TakenDate" ColumnName="TakenDate" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ActiveDate" ColumnName="ActiveDate" />
           <ScalarProperty Name="DeActiveDate" ColumnName="DeActiveDate" />

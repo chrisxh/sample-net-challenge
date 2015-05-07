@@ -27,6 +27,7 @@ namespace AppStoreApi.DbContext
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool Active { get; set; }
         public string Number { get; set; }
+        public Nullable<System.DateTime> TakenDate { get; set; }
     
         public virtual ICollection<CustomerLicens> CustomerLicenses { get; set; }
         public virtual ICollection<LicensedApp> LicensedApps { get; set; }

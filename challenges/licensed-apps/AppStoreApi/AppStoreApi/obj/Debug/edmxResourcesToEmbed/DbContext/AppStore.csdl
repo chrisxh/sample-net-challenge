@@ -48,6 +48,7 @@
     <Property Name="Number" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CustomerLicenses" Relationship="Self.FK_CustomerLicenses_License" FromRole="License" ToRole="CustomerLicenses" />
     <NavigationProperty Name="LicensedApps" Relationship="Self.FK_LicensedApps_License" FromRole="License" ToRole="LicensedApps" />
+    <Property Name="TakenDate" Type="DateTime" Precision="7" />
   </EntityType>
   <EntityType Name="LicensedApp">
     <Key>

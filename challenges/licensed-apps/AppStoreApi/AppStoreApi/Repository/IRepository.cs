@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Hosting;
 using AppStoreApi.DbContext;
 using AppStoreApi.Models;
 
@@ -43,5 +44,13 @@ namespace AppStoreApi.Repository
         IEnumerable<LicenseInfo> GetAppLicenses(int id);
 
         IEnumerable<LicenseInfo> GetActiveLicenses();
+
+        void AddLicenseToApp(Models.LicensedApp app);
+
+        IEnumerable<AppInfo> GetCustomerApps(int id);
+
+        IEnumerable<ActiveApplication> GetActiveApps();
+
+        void AddCustApp(CustomerApps custApps);
     }
 }

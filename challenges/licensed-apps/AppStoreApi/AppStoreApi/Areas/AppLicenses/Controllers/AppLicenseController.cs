@@ -26,5 +26,10 @@ namespace AppStoreApi.Areas.AppLicenses.Controllers
 
             return licenses;
         }
+
+        public void Post(LicensedApp applicensed)
+        {
+            _appLicenseRepo.AddLicenseToApp(applicensed);
+        }
     }
 }

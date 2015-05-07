@@ -4,8 +4,11 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
+using System.Web.Configuration;
+using System.Web.Hosting;
 using AppStoreApi.DbContext;
 using AppStoreApi.Models;
+using LicensedApp = AppStoreApi.Models.LicensedApp;
 
 namespace AppStoreApi.Repository
 {
@@ -246,6 +249,84 @@ namespace AppStoreApi.Repository
                     Active = c.Active
                 }).ToList();
             return activeLic;
+        }
+
+        public void AddLicenseToApp(LicensedApp app)
+        {
+            foreach (var x in app.LicenseApp)
+            {
+                var addLicenseToApp = new DbContext.LicensedApp
+                {
+                    AppId = app.Id,
+                    LicenseId = x.LicenseId
+                };
+
+                db.LicensedApps.Add(addLicenseToApp);
+                db.SaveChanges();
+
+            }
+        }
+
+        public IEnumerable<AppInfo> GetCustomerApps(int id)
+        {
+            var apps = (from c in db.CustomerLicenses where c.CustomerId == id select c.LicenseId).ToList();
+            var licensedApps = (from lc in db.LicensedApps
+                where apps.Contains(lc.LicenseId)
+                from jc in db.Apps
+                where lc.AppId == jc.Id
+                select new AppInfo
+                {
+                    Id = jc.Id,
+                    Title = jc.Title,
+                    Icon = jc.Icon,
+                    Active = jc.Active
+                }).ToList();
+            
+
+            return licensedApps;
+        }
+
+        public IEnumerable<ActiveApplication> GetActiveApps()
+        {
+            var activeapp = (from ac in db.Apps
+                             from j in ac.LicensedApps
+                             where j.AppId == ac.Id && j.License.TakenDate == null && ac.Active
+                select new ActiveApplication
+                {
+                    LicenseId = j.LicenseId,
+                    Application = new AppInfo
+                    {
+                        Id = ac.Id,
+                        Title = ac.Title,
+                        Icon = ac.Icon,
+                        Active = ac.Active
+                    }
+
+                }).ToList();
+
+            return activeapp;
+        }
+
+        public void AddCustApp(CustomerApps custApps)
+        {
+            foreach (var x in custApps.LicensedApp)
+            {
+                var addLicenseToApp = new DbContext.CustomerLicens
+                {
+                    CustomerId = custApps.Id,
+                    LicenseId = x.LicenseId
+                };
+
+                db.CustomerLicenses.Add(addLicenseToApp);
+                db.SaveChanges();
+
+                var updateLicense = (from l in db.Licenses where l.Id == x.LicenseId select l).FirstOrDefault();
+                if (updateLicense != null)
+                {
+                    updateLicense.TakenDate = DateTime.Now;
+                    db.SaveChanges();
+                }
+            }
         }
 
         protected void Dispose(bool disposing)

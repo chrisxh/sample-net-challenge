@@ -47,6 +47,7 @@
           <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Number" Type="varchar" MaxLength="250" />
+          <Property Name="TakenDate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="LicensedApps">
           <Key>
@@ -179,6 +180,7 @@
           <Property Name="Number" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CustomerLicenses" Relationship="Self.FK_CustomerLicenses_License" FromRole="License" ToRole="CustomerLicenses" />
           <NavigationProperty Name="LicensedApps" Relationship="Self.FK_LicensedApps_License" FromRole="License" ToRole="LicensedApps" />
+          <Property Name="TakenDate" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="LicensedApp">
           <Key>
@@ -304,6 +306,7 @@
           <EntitySetMapping Name="Licenses">
             <EntityTypeMapping TypeName="ApplicationStoreDBModel.License">
               <MappingFragment StoreEntitySet="License">
+                <ScalarProperty Name="TakenDate" ColumnName="TakenDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ActiveDate" ColumnName="ActiveDate" />
                 <ScalarProperty Name="DeActiveDate" ColumnName="DeActiveDate" />
