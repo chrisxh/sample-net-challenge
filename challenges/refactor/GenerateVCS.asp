@@ -62,10 +62,15 @@
 
 		'This changes the month (and the year if necessary) if the new end day is greater than the last day of any given month
 		select case calEndMon
-			case 01
+			case 01,03,05,07,08,10,12
 				if calEndDay > 31 then
 					calEndDay = "0" & calEndDay - 31
-					calEndMon = "02"
+					if calEndMon = 12 then
+						calEndMon = "01"
+						calEndYear = calEndYear + 01
+					else
+						calEndMon = Cstr(calEndMon + 01)
+					end if
 				end if
 			case 02
 				if calEndYear <> 2012 or calEndYear <> 2016 or calEndYear <> 2020 or calEndYear <> 2024 then
@@ -73,62 +78,14 @@
 						calEndDay = "0" & calEndDay - 28
 						calEndMon = "03"
 					end if
-				elseif calEndYear = 2012 or calEndYear = 2016 or calEndYear = 2020 or calEndYear = 2024 then
 					if calEndDay > 29 then
 						calEndDay = "0" & calEndDay - 29
 						calEndMon = "03"
 					end if
-				end if
-			case 03
-				if calEndDay > 31 then
-					calEndDay = "0" & calEndDay - 31
-					calEndMon = "04"
-				end if
-			case 04
+			case 04,06,09,11
 				if calEndDay > 30 then
 					calEndDay = "0" & calEndDay - 30
-					calEndMon = "05"
-				end if
-			case 05
-				if calEndDay > 31 then
-					calEndDay = "0" & calEndDay - 31
-					calEndMon = "06"
-				end if
-			case 06
-				if calEndDay > 30 then
-					calEndDay = "0" & calEndDay - 30
-					calEndMon = "07"
-				end if
-			case 07
-				if calEndDay > 31 then
-					calEndDay = "0" & calEndDay - 31
-					calEndMon = "08"
-				end if
-			case 08
-				if calEndDay > 31 then
-					calEndDay = "0" & calEndDay - 31
-					calEndMon = "09"
-				end if
-			case 09
-				if calEndDay > 30 then
-					calEndDay = "0" & calEndDay - 30
-					calEndMon = "10"
-				end if
-			case 10
-				if calEndDay > 31 then
-					calEndDay = "0" & calEndDay - 31
-					calEndMon = "11"
-				end if
-			case 11
-				if calEndDay > 30 then
-					calEndDay = "0" & calEndDay - 30
-					calEndMon = "12"
-				end if
-			case 12
-				if calEndDay > 31 then
-					calEndDay = "0" & calEndDay - 31
-					calEndMon = "01"
-					calEndYear = calEndYear + 01
+					calEndMon = Cstr(calEndMon + 01)
 				end if
 		end select
 		calEndDate = calEndYear & calEndMon & calEndDay  
@@ -141,72 +98,9 @@
 
 		'THESE ARE THE SCHEDULED BEGINNING AND ENDING DATES FOR DAYLIGHT SAVINGS TIME AS OF 2012
 		select case left(calDate,4)
-			case 2012
+			case 2012, 2013,2014,2015,2016,2017,2018,2019,2020,2021
 '        dsTime = "-07;20120311T025959;20121104T010000;CST;CDT"
-				if calDate & startTime >= 20120311025950 and calDate & endTime <= 20121104010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2013
-'        dsTime = "-07;20130310T025959;20131103T010000;CST;CDT"
-				if calDate & startTime >= 20130310025950 and calDate & endTime <= 20131103010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2014
-'        dsTime = "-07;20140309T025959;20141102T010000;CST;CDT"
-				if calDate & startTime >= 20140309025950 and calDate & endTime <= 20141102010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2015
-'        dsTime = "-07;20150308T025959;20151101T010000;CST;CDT"
-				if calDate & startTime >= 20150308025950 and calDate & endTime <= 20151101010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2016
-'        dsTime = "-07;20160313T025959;20161106T010000;CST;CDT"
-				if calDate & startTime >= 20160313025950 and calDate & endTime <= 20161106010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2017
-'        dsTime = "-07;20170312T025959;20171105T010000;CST;CDT"
-				if calDate & startTime >= 20170312025950 and calDate & endTime <= 20171105010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2018
-'        dsTime = "-07;20180311T025959;20181104T010000;CST;CDT"
-				if calDate & startTime >= 20180311025950 and calDate & endTime <= 20181104010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2019
-'        dsTime = "-07;20190310T025959;20191103T010000;CST;CDT"
-				if calDate & startTime >= 20190310025950 and calDate & endTime <= 20191103010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2020
-'        dsTime = "-07;20200308T025959;20201101T010000;CST;CDT"
-				if calDate & startTime >= 20200308025950 and calDate & endTime <= 20201101010000 then
-					dsTime = +05
-				else
-					dsTime = +06
-				end if
-			case 2021
-'        dsTime = "-07;20210314T025959;20211107T010000;CST;CDT"
-				if calDate & startTime >= 20210314025950 and calDate & endTime <= 20211107010000 then
+				if calDate & startTime >= 20120311025950 and calDate & endTime <= 20211107010000 then
 					dsTime = +05
 				else
 					dsTime = +06
@@ -246,24 +140,9 @@
 		dtStart = DateAdd("h",time_zone, objRS("Event_Begin_Date"))
 		dtEnd = DateAdd("h",time_zone, objRS("Event_End_Date"))
 		
-		dtStart = Year(dtStart) & _
-		Right("00" & Month(dtStart), 2) & _
-		Right("00" & Day(dtStart), 2) & _
-		"T" & _
-		Right("00" & Hour(dtStart), 2) & _
-		Right("00" & Minute(dtStart), 2) & _
-		Right("00" & Second(dtStart), 2) & _
-		"Z"
+		dtStart = YearStartEnd(dtStart)
 		
-		dtEnd = Year(dtEnd) & _
-		Right("00" & Month(dtEnd), 2) & _
-		Right("00" & Day(dtEnd), 2) & _
-		"T" & _
-		Right("00" & Hour(dtEnd), 2) & _
-		Right("00" & Minute(dtEnd), 2) & _
-		Right("00" & Second(dtEnd), 2) & _
-		"Z"  
-
+		dtEnd = YearStartEnd(dtEnd)
 		
 		strSubject = objRS("Event_Title")
 		strLocation = ""
@@ -283,6 +162,17 @@
 		"TRANSP:0" & vbCrlf & _
 		"End:VEVENT" & vbCrlf & _
 		"End:VCALENDAR" & vbCrlf
+	end function
+	
+	function YearStartEnd(date)
+		Year(dtEnd) & _
+		Right("00" & Month(dtEnd), 2) & _
+		Right("00" & Day(dtEnd), 2) & _
+		"T" & _
+		Right("00" & Hour(dtEnd), 2) & _
+		Right("00" & Minute(dtEnd), 2) & _
+		Right("00" & Second(dtEnd), 2) & _
+		"Z"  
 	end function
 %>
  
